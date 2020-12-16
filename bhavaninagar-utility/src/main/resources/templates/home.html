@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update Slip distance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <script>
+        function validateForm() {
+            var actuDistance = document.getElementById("actualDistance").value;  //document.forms["updateForm"]["distance"].value;
+            var factDistance = document.getElementById("distance").value;  //document.forms["updateForm"]["distance"].value;
+            
+            console.log(actuDistance +"  "+ factDistance);
+            if (factDistance > actuDistance) {
+                alert("Actual distance should be less than or equal to factory distance");
+                return false;
+            }
+        }
+    </script>
+    
+</head>
+
+<body>
+<h3 align="center">Welcome to <span>Bhavaninagar Data Entry Utility</span></h3>
+<div class="container my-5">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <h3>Search slip</h3><br/>
+
+                <form th:action="@{/getSlipDistance}" name="searchform">
+                    <div class="form-group col-md-8">
+                        <label for="slipNumber" class="col-form-label">Slip number:</label>
+                        <input type="number" id="slipNumber" th:name="slipNumber" required/>
+                    </div>
+                    <div class="col-md-6">
+                    <input type="submit" class="btn btn-primary" value="Search" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+				
+                <form action="#" th:action="@{/updateSlipDistance}" th:object="${distanceInfo}" th:if=${distanceInfo}
+                      method="post" name="updateForm" >
+                    <h3>Update Slip Distance Form</h3><br/>
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="slipNo" class="col-form-label">Slip Number</label>
+                            <input th:disabled="true" type="number" th:field="*{slipNo}" class="form-control"
+                                   id="slipNo" placeholder="Slip Number" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="transporterCode" class="col-form-label">Transporter Code</label>
+                            <input th:disabled="true" type="number" th:field="*{transporterCode}" class="form-control"
+                                   id="transporterCode" placeholder="Transporter Code" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="distance" class="col-form-label">Factory Distance</label>
+                            <input th:disabled="true" type="number" th:field="*{distance}" class="form-control"
+                                   id="distance" placeholder="Factory Distance" />
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="actualDistance" class="col-form-label">Actual Distance</label>
+                            <input type="number" th:field="*{actualDistance}" class="form-control"
+                                   id="c" placeholder="Actual Distance" required/>
+                        </div>
+
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{yearCode}"/>
+                        <input type="hidden" th:field="*{shiftNumber}"/>
+                        <input type="hidden" th:field="*{slipDate}"/>
+                        <input type="hidden" th:field="*{plotNumber}"/>
+                        <input type="hidden" th:field="*{token}"/>
+                        <input type="hidden" th:field="*{vehicleType}"/>
+                        <input type="hidden" th:field="*{harvestorCode}"/>
+                        <input type="hidden" th:field="*{transporterCode}"/>
+                        <input type="hidden" th:field="*{vehicleNumber}"/>
+                        <input type="hidden" th:field="*{bulluckcartCode}"/>
+                        <input type="hidden" th:field="*{bulluckcartMainCode}"/>
+                        <input type="hidden" th:field="*{createDate}"/>
+                        <input type="hidden" th:field="*{updateDate}"/>
+                        <input type="hidden" th:field="*{status}"/>
+
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value=" Update " onclick="validateForm()">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
