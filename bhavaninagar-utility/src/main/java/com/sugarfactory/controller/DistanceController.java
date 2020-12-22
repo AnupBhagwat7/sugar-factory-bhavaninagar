@@ -10,11 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/bhavaninagar")
+@RequestMapping("/nirabhima")
 public class DistanceController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class DistanceController {
         return "hello";
     }
 
-    @GetMapping(value = "/getSlipDistance/{slipNo}")
+    @GetMapping("/getSlipDistance/{slipNo}")
     public ResponseEntity<DistanceInfo> getByslipNumber (@PathVariable("slipNo") Integer slipNo)
     {
         //DistanceInfo distanceInfo = null;
@@ -46,6 +47,15 @@ public class DistanceController {
     public List<DistanceInfo> getSlipData() {
 
         List<DistanceInfo> list = distanceRepository.findAll();
+        return list;
+    }
+
+    @GetMapping("/getSlipDistanceData/{fromDate}/{toDate}")
+    public List<DistanceInfo> getSlipDataBetweenDates(@PathVariable String fromDate, @PathVariable String toDate) {
+
+    	Date from = new Date(fromDate);
+    	Date to = new Date(toDate);
+        List<DistanceInfo> list = distanceRepository.findDistanceInfoByCreateDateBetween(from, to);
         return list;
     }
 

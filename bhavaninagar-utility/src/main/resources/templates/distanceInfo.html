@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Download Slip distance data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    
+</head>
+
+<body>
+<!-- <h3 align="center">Welcome to <span>Nirabhima Data Entry Utility</span></h3> -->
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Bhavaninagar  Utility</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/searchUpdateDistance">Update Distance
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/distanceInfo">Distance Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <h3>Download Slip distance data</h3><br/>
+
+                <form th:action="@{/getSlipDistanceData}" name="downloadform">
+					<main class="container">
+					    <div class="row" width="276">
+					        <div class="col">
+					        	<label for="fromdatepicker" class="col-form-label">From date:</label>					        	
+					            <input class="form-control" id="fromdatepicker" th:name="fromDate" required/>
+					        </div>
+					    </div>
+					    <div class="row" style="padding-top: 20px;width : 276;">
+					        <div class="col">
+					        	<label for="todatepicker" class="col-form-label">To date:</label>
+					            <input class="form-control" id="todatepicker" th:name="toDate" required/>
+					        </div>
+					    </div>
+					</main>
+               
+                    <div class="col-md-6" style="padding-top: 20px">
+                    <input type="submit" class="btn btn-primary" value="Download" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<script type="text/javascript">
+	    $('#fromdatepicker').datepicker({
+	        autoclose: true,
+	        todayHighlight: true,
+	        format: 'dd-mmm-yy'
+	    });
+	    $('#todatepicker').datepicker({
+	        autoclose: true,
+	        format: 'dd-mmm-yy',
+	        todayHighlight: true
+	    });
+	    $('#fromdatepicker').datepicker("setDate", new Date()-1);	    
+	    $('#todatepicker').datepicker("setDate", new Date()-1);
+
+	</script>
+
+</body>
+
+</html>
