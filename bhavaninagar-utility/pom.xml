@@ -9,13 +9,15 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sugarfactory</groupId>
-	<artifactId>bhavaninagar-utility</artifactId>
+	<artifactId>nirabhima-utility</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bhavaninagar-utility</name>
-	<description>Demo project for Spring Boot bhavaninagar  utility</description>
+	<name>nirabhima-utility</name>
+	<description>Demo project for Spring Boot nirabhima  utility</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<bootstrap.version>4.0.0-2</bootstrap.version>
+        <webjars-locator.version>0.30</webjars-locator.version>
 	</properties>
 
 	<dependencies>
@@ -43,7 +45,17 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>${webjars-locator.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
@@ -64,6 +76,34 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.6</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-csv</artifactId>
+		    <version>2.11.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>2.2.0</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
