@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,6 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
 import com.google.gson.Gson;
-import com.jayway.jsonpath.JsonPath;
 import com.sugarfactory.model.DistanceInfo;
 import com.sugarfactory.repository.DistanceRepository;
 import com.sugarfactory.service.DistanceService;
@@ -78,7 +78,7 @@ public class HomeController {
     }
     
     
-    @GetMapping("{tab}")
+/*    @GetMapping("{tab}")
     public String tab(@PathVariable String tab) {
         if (Arrays.asList("searchUpdateDistance", "distanceInfo")
                 .contains(tab)) {
@@ -86,7 +86,7 @@ public class HomeController {
         }
 
         return "empty";
-    }
+    }*/
 
     @GetMapping(value = "/getSlipDistance")
     public String getBySlipNumber (@RequestParam(value = "slipNumber", required = false) Integer slipNumber, Model model)
@@ -134,6 +134,7 @@ public class HomeController {
         
         File csvfile = new File("slipdistanceData.csv");
         CsvMapper csvMapper = new CsvMapper();
+        csvMapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN,true);
         csvMapper.writerFor(JsonNode.class)
           .with(csvSchema)
           .writeValue(csvfile, jsonTree);

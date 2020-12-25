@@ -19,7 +19,7 @@ public class DistanceInfo
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "slip_dist_generator")
     private Long id;
 
-    @Column(name = "VYEAR_CODE")
+    @Column(name = "VSEASON_YEAR")
     protected String yearCode;
     @Column(name = "NSLIP_NO")
     protected Integer slipNo;
@@ -35,15 +35,15 @@ public class DistanceInfo
     private Integer distance;
     @Column(name = "NVEHICLE_TYPE")
     private Integer vehicleType;
-    @Column(name = "NHARVESTOR_CODE")
+    @Column(name = "NHARVESTER_CODE")
     private Integer harvestorCode;
-    @Column(name = "NTRANSPORTOR_CODE")
+    @Column(name = "NTRANSPORTER_CODE")
     private Integer transporterCode;
     @Column(name = "VVEHICLE_NO")
     private String vehicleNumber;
-    @Column(name = "NBULLUCKCART_CODE")
+    @Column(name = "NGADIWAN_CODE")
     private Integer bulluckcartCode;
-    @Column(name = "NBULLUCKCART_MAIN_CODE")
+    @Column(name = "NBULLOCK_CART_CODE")
     private Integer bulluckcartMainCode;
     @Column(name = "DCREATE_DATE")
     private Date createDate;
