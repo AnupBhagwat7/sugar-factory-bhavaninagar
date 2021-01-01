@@ -76,8 +76,7 @@ public class HomeController {
         //model.addAttribute("distanceInfo", model.getAttribute("distanceInfo"));
         return "distanceInfo";
     }
-    
-    
+
 /*    @GetMapping("{tab}")
     public String tab(@PathVariable String tab) {
         if (Arrays.asList("searchUpdateDistance", "distanceInfo")
@@ -114,52 +113,9 @@ public class HomeController {
     	Date from = new Date(fromDate);
     	Date to = new Date(toDate);
     	
-        List<DistanceInfo> list = distanceRepository.findDistanceInfoByCreateDateBetween(from, to);
-        
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        
-        File file =  new File("data.json");
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(json.getBytes());
-        fos.close();
-        
-        //Create CSV
-        JsonNode jsonTree = new ObjectMapper().readTree(file);
-        
-        Builder csvSchemaBuilder = CsvSchema.builder();
-        JsonNode firstObject = jsonTree.elements().next();
-        firstObject.fieldNames().forEachRemaining(fieldName -> {csvSchemaBuilder.addColumn(fieldName);} );
-        CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
-        
-        File csvfile = new File("slipdistanceData.csv");
-        CsvMapper csvMapper = new CsvMapper();
-        csvMapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN,true);
-        csvMapper.writerFor(JsonNode.class)
-          .with(csvSchema)
-          .writeValue(csvfile, jsonTree);
-        //
+        List<DistanceInfo> list = distanceRepository.findDistanceInfoBySlipDateIsBetween(from , to);
 
-        //FileInputStream fis = new FileInputStream(file);
-        //fis.read();
-        //return IOUtils.toByteArray(in);
-        HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=slipdistanceData.csv");
-        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        header.add("Pragma", "no-cache");
-        header.add("Expires", "0");
-
-        Path path = Paths.get(csvfile.getAbsolutePath());
-        ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
-        
-        //InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-
-        return ResponseEntity.ok()
-                .headers(header)
-                .contentLength(csvfile.length())
-                .contentType(MediaType.parseMediaType("application/csv"))
-                .body(resource);
-    	
+        return distanceService.getCsvfile(list);
     }
     
     @GetMapping("/getSlipDistanceDataold")

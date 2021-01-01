@@ -22,4 +22,6 @@ public interface DistanceRepository extends JpaRepository<DistanceInfo, Long> {
     DistanceInfo findBySlipNo(Integer slipNo);
 
     List<DistanceInfo> findDistanceInfoByCreateDateBetween(Date fromDate, Date toDate);
+
+    List<DistanceInfo> findDistanceInfoBySlipDateIsBetween(Date fromDate, Date toDate);
 }
