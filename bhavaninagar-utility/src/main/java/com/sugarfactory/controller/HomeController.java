@@ -146,7 +146,7 @@ public class HomeController {
                                   Model model) {
         
         Optional<DistanceInfo> distanceInfo1 = distanceRepository.findById(distanceInfo.getId());
-        if (distanceInfo1.get().getDistance() < distanceInfo.getActualDistance()) {
+        if (distanceInfo1.get().getDistance() !=0  && distanceInfo1.get().getDistance() < distanceInfo.getActualDistance()) {
         	log.debug("Actual distance : "+ distanceInfo.getActualDistance() +" factory distance: "+ distanceInfo1.get().getDistance());
         	model.addAttribute("distError", "Actual distance should be less than or equal to factory distance");
         	return "home";
